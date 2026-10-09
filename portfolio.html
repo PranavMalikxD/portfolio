@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pranav Malik · Aspiring Web Designer &amp; Frontend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,800&display=swap">
+<style>
+:root{
+  --bg:#0d0f1c; --surface:#161931; --line:#2a2e52; --text:#ece9f5; --muted:#9a9cc0; --accent:#9db4ff; --warm:#ffb98a;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth;overflow-x:hidden}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Bricolage Grotesque',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:1.0625rem;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:4px}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1}
+nav{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 0}
+nav .logo{font-weight:800;letter-spacing:-.02em;font-size:1.15rem}
+nav ul{display:flex;gap:1.5rem;list-style:none;margin:0;padding:0;color:var(--muted)}
+nav ul a:hover{color:var(--text)}
+
+.hero{padding:clamp(4rem,10vw,8rem) 0 clamp(2.5rem,6vw,4.5rem)}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--surface);border:1px solid var(--line);color:var(--accent);padding:.4rem .9rem;border-radius:999px;font-size:.875rem;margin-bottom:1.5rem;max-width:100%;white-space:normal;line-height:1.4}
+.hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block;animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(157,180,255,.5)}100%{box-shadow:0 0 0 10px rgba(157,180,255,0)}}
+
+h1{font-size:clamp(2.6rem,8.5vw,6.5rem);line-height:.96;letter-spacing:-.045em;font-weight:800;margin:0 0 1.8rem}
+h1 span{display:block;overflow:hidden}
+h1 span i{display:block;font-style:normal;transform:translateY(105%);animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards}
+h1 span:nth-child(2) i{animation-delay:.12s;color:var(--accent);font-weight:300}
+h1 span:nth-child(3) i{animation-delay:.24s}
+@keyframes rise{to{transform:none}}
+
+.lead{max-width:39rem;color:var(--muted);font-size:1.2rem;line-height:1.55;margin:0 0 2rem}
+.btn-group{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;background:var(--accent);color:#0d0f1c;padding:.75rem 1.4rem;border-radius:999px;font-weight:500;transition:background .2s,transform .2s;text-align:center}
+.btn:hover{background:var(--text);transform:translateY(-1px)}
+.btn.ghost{background:none;color:var(--text);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--accent);background:var(--surface);color:var(--text)}
+
+.stats{display:flex;gap:2.5rem;flex-wrap:wrap;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--line)}
+.stats b{display:block;font-size:1.8rem;line-height:1.1;font-weight:800;letter-spacing:-.03em;color:var(--warm)}
+.stats span{color:var(--muted);font-size:.9rem}
+
+.marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:1.2rem 0;white-space:nowrap}
+.marquee-track{display:inline-flex;animation:slide 32s linear infinite;font-size:clamp(1.2rem,3.2vw,1.9rem);font-weight:300;letter-spacing:-.02em;color:var(--muted)}
+.marquee-track span{margin-right:2.8rem}
+.marquee-track span:nth-child(even){color:var(--accent)}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+section{padding:clamp(3rem,7vw,5rem) 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-.03em;margin:0 0 1rem;font-weight:500}
+.section-desc{color:var(--muted);margin:0 0 2.5rem;max-width:38rem}
+
+.work{list-style:none;margin:0;padding:0}
+.work-item{padding:2rem 0;border-bottom:1px solid var(--line);transition:padding .25s,background .25s}
+.work-item:hover{padding-left:1rem;background:var(--surface)}
+.work-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.5rem 1.5rem}
+.work h3{margin:0;font-size:clamp(1.4rem,3.5vw,2rem);letter-spacing:-.025em;font-weight:500}
+.work p{margin:.6rem 0 0;color:var(--muted);max-width:44rem;line-height:1.55}
+.work .meta{color:var(--warm);text-align:right;font-size:.92rem;font-weight:500}
+.work .tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.85rem}
+.work .tag{background:rgba(157,180,255,.08);color:var(--accent);border:1px solid rgba(157,180,255,.2);padding:.2rem .65rem;border-radius:999px;font-size:.8rem}
+.project-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.2rem}
+.project-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.55rem 1.15rem;min-height:40px;border-radius:999px;font-size:.875rem;font-weight:500;border:1px solid var(--line);color:var(--text);transition:all .2s;text-decoration:none}
+.project-btn:hover{border-color:var(--accent);background:var(--surface);color:var(--accent);transform:translateY(-1px)}
+.project-btn.primary{background:var(--accent);color:#0d0f1c;border-color:var(--accent)}
+.project-btn.primary:hover{background:var(--text);color:#0d0f1c}
+
+.about{display:grid;grid-template-columns:1.8fr 1.2fr;gap:3rem}
+.about p{margin:0 0 1.2rem;max-width:38rem;color:var(--text);line-height:1.6}
+.skills-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.8rem}
+.skills-card h3{margin:0 0 1rem;font-size:1.15rem;letter-spacing:-.02em;color:var(--warm);font-weight:500}
+.skills{list-style:none;margin:0;padding:0;color:var(--muted)}
+.skills li{padding:.75rem 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:.2rem}
+.skills li:last-child{border-bottom:none;padding-bottom:0}
+.skills li strong{color:var(--text);font-weight:500}
+.skills li span{font-size:.88rem;color:var(--muted)}
+
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:1.5rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.6rem;transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card h3{margin:0 0 .5rem;font-size:1.2rem;font-weight:500;color:var(--text)}
+.card p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.55}
+
+.process-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1.5rem}
+.process-step{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.5rem}
+.process-num{font-size:1.6rem;font-weight:800;color:var(--accent);margin-bottom:.5rem;letter-spacing:-.03em}
+.process-step h3{margin:0 0 .4rem;font-size:1.1rem;font-weight:500}
+.process-step p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.5}
+
+.contact{text-align:left}
+.contact p.contact-lead{color:var(--muted);font-size:1.2rem;max-width:38rem;margin:0 0 1.8rem}
+.contact-methods{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.5rem}
+.contact a.mail{display:inline-block;font-size:clamp(1.5rem,5.5vw,3.2rem);letter-spacing:-.035em;font-weight:300;color:var(--accent);word-break:break-word;transition:color .2s}
+.contact a.mail:hover{color:var(--text)}
+.contact a.phone{display:inline-block;font-size:clamp(1.3rem,4.2vw,2.2rem);letter-spacing:-.025em;font-weight:300;color:var(--warm);text-decoration:none;transition:color .2s}
+.contact a.phone:hover{color:var(--text)}
+.contact-links{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.5rem}
+
+footer{padding:2.5rem 0;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+
+.progress{position:fixed;top:0;left:0;height:3px;width:100%;background:linear-gradient(90deg,var(--accent),var(--warm));transform:scaleX(0);transform-origin:left;z-index:10}
+.glow{position:fixed;left:0;top:0;width:28rem;height:28rem;border-radius:50%;background:radial-gradient(circle,rgba(157,180,255,.13),transparent 65%);pointer-events:none;z-index:0}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:48rem){
+  .wrap{padding:0 1.25rem}
+  nav{padding:1.2rem 0;flex-wrap:wrap;gap:.8rem}
+  nav ul{gap:.8rem 1.2rem;font-size:.92rem;flex-wrap:wrap}
+  .hero{padding:3.5rem 0 2rem}
+  .about{grid-template-columns:1fr;gap:2rem}
+  .work-item{padding:1.5rem 0}
+  .work-head{flex-direction:column;gap:.25rem}
+  .work .meta{text-align:left}
+  .stats{gap:1.5rem}
+}
+@media (max-width:36rem){
+  body{font-size:1rem}
+  nav{flex-direction:column;align-items:flex-start;gap:.75rem;padding:1rem 0}
+  nav ul{width:100%;display:flex;flex-wrap:wrap;gap:.5rem .85rem;font-size:.875rem}
+  h1{font-size:clamp(2.1rem,10vw,3.2rem);margin:0 0 1.4rem}
+  .lead{font-size:1.05rem;line-height:1.5}
+  .btn-group{flex-direction:column;width:100%}
+  .btn-group .btn{width:100%}
+  .stats{flex-direction:column;gap:1.2rem;margin-top:2rem;padding-top:1.5rem}
+  .stats b{font-size:1.45rem}
+  .project-actions{flex-direction:column;width:100%}
+  .project-btn{width:100%;justify-content:center;min-height:44px}
+  .marquee{padding:1rem 0}
+  section{padding:2.8rem 0}
+  h2{font-size:1.6rem;margin-bottom:.8rem}
+  .cards-grid{grid-template-columns:1fr}
+  .process-list{grid-template-columns:1fr}
+  .skills-card{padding:1.4rem}
+  .contact a.mail{font-size:clamp(1.35rem,6.2vw,2rem)}
+  .contact a.phone{font-size:clamp(1.15rem,5.2vw,1.6rem)}
+  .contact-links{flex-direction:column;width:100%}
+  .contact-links .btn{width:100%}
+  footer{flex-direction:column;gap:.5rem;text-align:left;font-size:.85rem;padding:2rem 0}
+}
+@media (prefers-reduced-motion:reduce){
+  h1 span i{animation:none;transform:none}
+  .reveal{opacity:1!important;transform:none!important;transition:none}
+  .marquee-track{animation:none!important}
+  .progress,.glow{display:none}
+  html{scroll-behavior:auto}
+  .work-item,.card{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="glow" id="glow"></div>
+
+<div class="wrap">
+  <nav>
+    <a class="logo" href="#top">Pranav Malik</a>
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#style">Style</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      <span>First-year B.Tech (AR) · USAR, GGSIPU East Campus · ACTS Club Applicant</span>
+    </div>
+    <h1 aria-label="Aspiring Web Designer & Frontend Developer">
+      <span><i>Aspiring</i></span>
+      <span><i>Web Designer &amp;</i></span>
+      <span><i>Frontend Developer.</i></span>
+    </h1>
+    <p class="lead">I’m an Automation and Robotics student at the University School of Automation and Robotics (USAR), GGSIPU East Delhi Campus. I explore the space where thoughtful design, technology and interactive experiences meet, turning ideas into clear, engaging digital experiences.</p>
+    <div class="btn-group">
+      <a class="btn" href="#work">Explore my work</a>
+      <a class="btn ghost" href="#about">A little about me</a>
+    </div>
+
+    <div class="stats">
+      <div><b>USAR · GGSIPU</b><span>East Campus (B.Tech AR)</span></div>
+      <div><b>Saksham (SIH 2026)</b><span>iGOT Learning Platform</span></div>
+      <div><b>Interschool Gold Medal</b><span>Global Harmony (Unity 3D)</span></div>
+    </div>
+  </header>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Web Design</span>
+      <span>UI/UX Exploration</span>
+      <span>Frontend Development</span>
+      <span>React &amp; Tailwind</span>
+      <span>iGOT Karmayogi</span>
+      <span>HTML &amp; CSS</span>
+      <span>JavaScript</span>
+      <span>Figma</span>
+      <span>Unity 3D</span>
+      <span>Visual Hierarchy</span>
+      <span>Web Design</span>
+      <span>UI/UX Exploration</span>
+      <span>Frontend Development</span>
+      <span>React &amp; Tailwind</span>
+      <span>iGOT Karmayogi</span>
+      <span>HTML &amp; CSS</span>
+      <span>JavaScript</span>
+      <span>Figma</span>
+      <span>Unity 3D</span>
+      <span>Visual Hierarchy</span>
+    </div>
+  </div>
+
+  <section id="work">
+    <h2>Selected work</h2>
+    <p class="section-desc">Projects reflecting my approach to technical storytelling, structured problem-solving, and interactive experiences.</p>
+    <ul class="work">
+      <li class="work-item">
+        <div class="work-head">
+          <h3>Saksham</h3>
+          <span class="meta">Smart India Hackathon 2026 · Team VoidOnyx (SIH26101)</span>
+        </div>
+        <p>An AI-enabled competency gap analysis and personalized learning platform integrated with the iGOT Karmayogi ecosystem, built for India's Official Statistical System (MoSPI). Designed role-specific React web portals (Officer, Trainer, Admin), automated RAG-based quiz generation from uploaded documents without paid LLM dependencies, and an interactive AI help chatbot powered by the Groq API.</p>
+        <div class="tags">
+          <span class="tag">iGOT Karmayogi Integration</span>
+          <span class="tag">Role-Based React Portals</span>
+          <span class="tag">RAG Quiz Generation</span>
+          <span class="tag">Competency Gap Analysis</span>
+          <span class="tag">Groq AI Chatbot</span>
+          <span class="tag">SIH 2026</span>
+        </div>
+        <div class="project-actions">
+          <a class="project-btn primary" href="https://sakshamfrontend.vercel.app" target="_blank" rel="noopener">
+            <span>Frontend Deployment</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+          <a class="project-btn" href="https://github.com/PranavMalikxD/with-chatbot-v2" target="_blank" rel="noopener">
+            <span>GitHub Repository</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </a>
+        </div>
+      </li>
+      <li class="work-item">
+        <div class="work-head">
+          <h3>Global Harmony</h3>
+          <span class="meta">Unity · Interschool Gold Medal Winner</span>
+        </div>
+        <p>A Monopoly-style 3D board-game concept built in Unity that won the Interschool Gold Medal last year. The project explored how a traditional tabletop board-game format could become an engaging interactive digital experience with its own visual identity, 3D environment, and gameplay flow.</p>
+        <div class="tags">
+          <span class="tag">Interschool Gold Medal (2025)</span>
+          <span class="tag">Interactive 3D Design</span>
+          <span class="tag">Game Concept Development</span>
+          <span class="tag">Unity</span>
+          <span class="tag">Visual Consistency</span>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="about" class="about">
+    <div>
+      <h2>About me</h2>
+      <p>I’m a 17-year-old (born 24 March 2009) first-year B.Tech student in Automation and Robotics at the <strong>University School of Automation and Robotics (USAR), GGSIPU East Campus</strong>, with an active interest in web design, user interfaces and interactive digital projects. I enjoy the mix of creative thinking and structured problem-solving that goes into building a good experience.</p>
+      <p>This portfolio brings together selected work that reflects how I think, experiment and learn, including <strong>Saksham</strong> (our SIH 2026 AI-enabled learning platform integrated with the iGOT Karmayogi ecosystem) and <strong>Global Harmony</strong> (an interactive 3D Unity board-game concept that won the Interschool Gold Medal last year). I’m looking to contribute, collaborate and grow through hands-on work with a creative team.</p>
+      <p>Profile: <strong>17 y/o · USAR, GGSIPU East Campus</strong></p>
+      <p>Applying for: <strong>Website Designer &amp; Frontend Implementer · ACTS club</strong></p>
+    </div>
+    <div class="skills-card">
+      <h3>Skills checklist</h3>
+      <ul class="skills" aria-label="Skills checklist">
+        <li>
+          <strong>Figma</strong>
+          <span>Create and explain basic frames, layouts, components and prototypes.</span>
+        </li>
+        <li>
+          <strong>Canva</strong>
+          <span>Craft visual assets, slides, and structured project presentations.</span>
+        </li>
+        <li>
+          <strong>HTML / CSS</strong>
+          <span>Build clean, semantic structure, responsive layouts, and modern styling.</span>
+        </li>
+        <li>
+          <strong>JavaScript</strong>
+          <span>Implement UI interactions, menu toggles, and scroll-reveal behaviors.</span>
+        </li>
+        <li>
+          <strong>Unity</strong>
+          <span>Construct 3D game scenes, interactive mechanics, and visual environments.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="style">
+    <h2>Skills &amp; working style</h2>
+    <p class="section-desc">Showing potential with honest foundations while actively developing my abilities.</p>
+    <div class="cards-grid">
+      <div class="card">
+        <h3>Visual communication</h3>
+        <p>I’m learning to use layout, spacing, contrast and visual hierarchy to make information clear and easy to navigate.</p>
+      </div>
+      <div class="card">
+        <h3>Web fundamentals</h3>
+        <p>I’m developing my understanding of how HTML structures a page, CSS controls presentation, and JavaScript adds interaction.</p>
+      </div>
+      <div class="card">
+        <h3>Interactive projects</h3>
+        <p>I contributed to Saksham (our SIH 2026 AI platform integrating iGOT Karmayogi) and built Global Harmony, an interactive 3D board game in Unity that won an Interschool Gold Medal last year. I’m interested in applying that frontend and interaction design mindset to web experiences.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <h2>A simple process</h2>
+    <p class="section-desc">My structured approach from problem definition to testing.</p>
+    <div class="process-list">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <h3>Understand</h3>
+        <p>Clarify the audience, goal and problem before touching code or layouts.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <h3>Structure</h3>
+        <p>Organise content and map the key sections or user journey logically.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <h3>Design &amp; build</h3>
+        <p>Create the interface and keep details, typography, and spacing consistent.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">04</div>
+        <h3>Test &amp; refine</h3>
+        <p>Check screen sizes, gather feedback, test interactions, and improve the result.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Let’s connect</h2>
+    <p class="contact-lead">I’m interested in learning from a team, contributing to projects and turning ideas into useful digital experiences.</p>
+    <div class="contact-methods">
+      <a class="mail" href="mailto:pranavmalik2409@gmail.com">pranavmalik2409@gmail.com</a>
+      <a class="phone" href="tel:+917982432700">+91 7982432700</a>
+    </div>
+    <div class="contact-links">
+      <a class="btn" href="mailto:pranavmalik2409@gmail.com">Send an Email</a>
+      <a class="btn ghost" href="tel:+917982432700">Call / WhatsApp</a>
+      <a class="btn ghost" href="https://github.com/PranavMalikxD" target="_blank" rel="noopener">GitHub Profile</a>
+      <a class="btn ghost" href="https://instagram.com/_7prnv" target="_blank" rel="noopener">Instagram (@_7prnv)</a>
+      <a class="btn ghost" href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+
+  <footer>
+    <div>© 2026 Pranav Malik. Built for ACTS Club Portfolio Review.</div>
+    <div>University School of Automation and Robotics (USAR), GGSIPU East Campus</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var prog=document.getElementById('progress'),glow=document.getElementById('glow');
+  function onScroll(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight;prog.style.transform='scaleX('+(m>0?h.scrollTop/m:0)+')'}
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  if(!rm&&matchMedia('(pointer:fine)').matches){
+    addEventListener('pointermove',function(e){glow.style.transform='translate('+(e.clientX-224)+'px,'+(e.clientY-224)+'px)'},{passive:true});
+  }
+  if(rm||!('IntersectionObserver' in window))return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(en){
+    if(!en.isIntersecting)return;
+    en.target.classList.add('in');io.unobserve(en.target);
+  })},{threshold:.15});
+  document.querySelectorAll('.work li, .card, .process-step, .skills-card').forEach(function(el,i){
+    el.classList.add('reveal');
+    el.style.transitionDelay=(Array.prototype.indexOf.call(el.parentNode.children,el)*80)+'ms';
+    io.observe(el);
+  });
+})();
+</script>
+</body>
+</html>
