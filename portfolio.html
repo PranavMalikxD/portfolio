@@ -184,7 +184,7 @@ footer{padding:2.5rem 0;color:var(--muted);font-size:.9rem;border-top:1px solid 
   background:rgba(8,10,20,.82);
   backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
-  z-index:9999;
+  z-index:99999;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -195,9 +195,9 @@ footer{padding:2.5rem 0;color:var(--muted);font-size:.9rem;border-top:1px solid 
   transition:opacity .25s ease,visibility .25s ease;
 }
 .modal-overlay.open{
-  opacity:1;
-  visibility:visible;
-  pointer-events:auto;
+  opacity:1 !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
 }
 .modal-card{
   background:var(--surface);
@@ -416,7 +416,7 @@ footer{padding:2.5rem 0;color:var(--muted);font-size:.9rem;border-top:1px solid 
       <li class="work-item">
         <div class="work-head">
           <h3>Global Harmony</h3>
-          <span class="meta">Unity · <button type="button" class="cert-link" id="certTrigger" aria-haspopup="dialog" aria-controls="certModal" title="Click to view Gold Medal Certificate">Interschool Gold Medal Winner <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></button></span>
+          <span class="meta">Unity · <button type="button" class="cert-link" id="certTrigger" onclick="openCertModal()" aria-haspopup="dialog" aria-controls="certModal" title="Click to view Gold Medal Certificate">Interschool Gold Medal Winner <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></button></span>
         </div>
         <p>A Monopoly-style 3D board-game concept built in Unity that won the Interschool Gold Medal last year. The project explored how a traditional tabletop board-game format could become an engaging interactive digital experience with its own visual identity, 3D environment, and gameplay flow.</p>
         <div class="tags">
@@ -427,7 +427,7 @@ footer{padding:2.5rem 0;color:var(--muted);font-size:.9rem;border-top:1px solid 
           <span class="tag">Visual Consistency</span>
         </div>
         <div class="project-actions">
-          <button type="button" class="project-btn primary" id="certBtn">
+          <button type="button" class="project-btn primary" id="certBtn" onclick="openCertModal()">
             <span>View Gold Medal Certificate</span>
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           </button>
@@ -539,86 +539,6 @@ footer{padding:2.5rem 0;color:var(--muted);font-size:.9rem;border-top:1px solid 
   </footer>
 </div>
 
-<script>
-(function(){
-  var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var prog=document.getElementById('progress'),glow=document.getElementById('glow');
-  function onScroll(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight;prog.style.transform='scaleX('+(m>0?h.scrollTop/m:0)+')'}
-  addEventListener('scroll',onScroll,{passive:true});onScroll();
-  if(!rm&&matchMedia('(pointer:fine)').matches){
-    addEventListener('pointermove',function(e){glow.style.transform='translate('+(e.clientX-224)+'px,'+(e.clientY-224)+'px)'},{passive:true});
-  }
-  if(rm||!('IntersectionObserver' in window))return;
-  var io=new IntersectionObserver(function(es){es.forEach(function(en){
-    if(!en.isIntersecting)return;
-    en.target.classList.add('in');io.unobserve(en.target);
-  })},{threshold:.15});
-  document.querySelectorAll('.work li, .card, .process-step, .skills-card').forEach(function(el,i){
-    el.classList.add('reveal');
-    el.style.transitionDelay=(Array.prototype.indexOf.call(el.parentNode.children,el)*80)+'ms';
-    io.observe(el);
-  });
-
-  // Certificate Modal logic
-  var modal = document.getElementById('certModal');
-  var closeBtn = document.getElementById('modalCloseBtn');
-  var closeBtnBottom = document.getElementById('modalCloseBtnBottom');
-  var certImg = document.getElementById('certImage');
-  var lastActive = null;
-
-  if (certImg) {
-    certImg.onerror = function() {
-      if (this.src.indexOf('public/certificate.jpg') !== -1) {
-        this.src = 'certificate.jpg';
-      }
-    };
-  }
-
-  function openModal() {
-    if (!modal) return;
-    lastActive = document.activeElement;
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    if (closeBtn) closeBtn.focus();
-  }
-
-  function closeModal() {
-    if (!modal || !modal.classList.contains('open')) return;
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    if (lastActive && typeof lastActive.focus === 'function') {
-      lastActive.focus();
-    }
-  }
-
-  document.querySelectorAll('#certTrigger, #certBtn').forEach(function(el){
-    el.addEventListener('click', function(e){
-      e.preventDefault();
-      openModal();
-    });
-  });
-
-  if (closeBtn) closeBtn.addEventListener('click', closeModal);
-  if (closeBtnBottom) closeBtnBottom.addEventListener('click', closeModal);
-
-  if (modal) {
-    modal.addEventListener('click', function(e){
-      if (e.target === modal) {
-        closeModal();
-      }
-    });
-  }
-
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape' && modal && modal.classList.contains('open')) {
-      closeModal();
-    }
-  });
-})();
-</script>
-
 <!-- Certificate Lightbox Modal -->
 <div class="modal-overlay" id="certModal" role="dialog" aria-modal="true" aria-labelledby="certModalTitle" aria-hidden="true">
   <div class="modal-card">
@@ -628,17 +548,100 @@ footer{padding:2.5rem 0;color:var(--muted);font-size:.9rem;border-top:1px solid 
         <h4 id="certModalTitle">Interschool Gold Medal · Peaceful Playoffs</h4>
         <p class="modal-subtitle">Futurama (Himalaya Public Sr. Sec. School) · Awarded to Pranav Malik</p>
       </div>
-      <button type="button" class="modal-close" id="modalCloseBtn" aria-label="Close certificate modal">&times;</button>
+      <button type="button" class="modal-close" id="modalCloseBtn" onclick="closeCertModal()" aria-label="Close certificate modal">&times;</button>
     </div>
     <div class="modal-body">
       <img src="public/certificate.jpg" alt="Interschool Gold Medal Certificate awarded to Pranav Malik for securing First position in Peaceful Playoffs at Futurama" class="cert-img" id="certImage">
     </div>
     <div class="modal-footer">
       <span>1st Position · Lancers Convent School · Class XII</span>
-      <button type="button" class="btn ghost btn-sm" id="modalCloseBtnBottom">Close</button>
+      <button type="button" class="btn ghost btn-sm" id="modalCloseBtnBottom" onclick="closeCertModal()">Close</button>
     </div>
   </div>
 </div>
 
+<script>
+// Ambient effects and scroll animations
+(function(){
+  var rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var prog = document.getElementById('progress'), glow = document.getElementById('glow');
+  function onScroll(){
+    var h = document.documentElement, m = h.scrollHeight - h.clientHeight;
+    if (prog) prog.style.transform = 'scaleX(' + (m > 0 ? h.scrollTop / m : 0) + ')';
+  }
+  addEventListener('scroll', onScroll, {passive: true});
+  onScroll();
+  if (!rm && glow && matchMedia('(pointer:fine)').matches){
+    addEventListener('pointermove', function(e){
+      glow.style.transform = 'translate(' + (e.clientX - 224) + 'px,' + (e.clientY - 224) + 'px)';
+    }, {passive: true});
+  }
+  if (rm || !('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if (!en.isIntersecting) return;
+      en.target.classList.add('in');
+      io.unobserve(en.target);
+    });
+  }, {threshold: 0.15});
+  document.querySelectorAll('.work li, .card, .process-step, .skills-card').forEach(function(el){
+    el.classList.add('reveal');
+    el.style.transitionDelay = (Array.prototype.indexOf.call(el.parentNode.children, el) * 80) + 'ms';
+    io.observe(el);
+  });
+})();
+
+// Certificate Lightbox Modal logic (global handlers)
+var lastActiveElement = null;
+
+function openCertModal(){
+  var modal = document.getElementById('certModal');
+  if (!modal) return;
+  lastActiveElement = document.activeElement;
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  var closeBtn = document.getElementById('modalCloseBtn');
+  if (closeBtn) closeBtn.focus();
+}
+
+function closeCertModal(){
+  var modal = document.getElementById('certModal');
+  if (!modal) return;
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  if (lastActiveElement && typeof lastActiveElement.focus === 'function') {
+    try { lastActiveElement.focus(); } catch(e){}
+  }
+}
+
+// Fallback image path resolver and click listeners
+(function(){
+  var certImg = document.getElementById('certImage');
+  if (certImg) {
+    certImg.onerror = function(){
+      if (this.src.indexOf('public/certificate.jpg') !== -1) {
+        this.src = 'certificate.jpg';
+      }
+    };
+  }
+
+  // Click outside modal card to close
+  document.addEventListener('click', function(e){
+    var modal = document.getElementById('certModal');
+    if (modal && modal.classList.contains('open') && e.target === modal) {
+      closeCertModal();
+    }
+  });
+
+  // Escape key to close
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') {
+      closeCertModal();
+    }
+  });
+})();
+</script>
 </body>
 </html>
