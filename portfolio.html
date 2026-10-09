@@ -551,7 +551,7 @@ footer{padding:2.5rem 0;color:var(--muted);font-size:.9rem;border-top:1px solid 
       <button type="button" class="modal-close" id="modalCloseBtn" onclick="closeCertModal()" aria-label="Close certificate modal">&times;</button>
     </div>
     <div class="modal-body">
-      <img src="public/certificate.jpg" alt="Interschool Gold Medal Certificate awarded to Pranav Malik for securing First position in Peaceful Playoffs at Futurama" class="cert-img" id="certImage">
+      <img src="certificate.jpg" alt="Interschool Gold Medal Certificate awarded to Pranav Malik for securing First position in Peaceful Playoffs at Futurama" class="cert-img" id="certImage">
     </div>
     <div class="modal-footer">
       <span>1st Position · Lancers Convent School · Class XII</span>
@@ -621,7 +621,9 @@ function closeCertModal(){
   var certImg = document.getElementById('certImage');
   if (certImg) {
     certImg.onerror = function(){
-      if (this.src.indexOf('public/certificate.jpg') !== -1) {
+      if (this.src.indexOf('public/certificate.jpg') === -1) {
+        this.src = 'public/certificate.jpg';
+      } else {
         this.src = 'certificate.jpg';
       }
     };
